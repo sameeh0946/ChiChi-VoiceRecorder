@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5FB866E42551D878007FE262 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB866E32551D878007FE262 /* AppDelegate.swift */; };
-		5FB866E62551D878007FE262 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB866E52551D878007FE262 /* SceneDelegate.swift */; };
 		5FB866E82551D878007FE262 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB866E72551D878007FE262 /* ViewController.swift */; };
 		5FB866EB2551D878007FE262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866E92551D878007FE262 /* Main.storyboard */; };
 		5FB866ED2551D886007FE262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EC2551D886007FE262 /* Assets.xcassets */; };
@@ -22,7 +21,6 @@
 		3D9B35984459E0F11D51286D /* Pods-ChiChi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChiChi.debug.xcconfig"; path = "Target Support Files/Pods-ChiChi/Pods-ChiChi.debug.xcconfig"; sourceTree = "<group>"; };
 		5FB866E02551D878007FE262 /* ChiChi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChiChi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FB866E32551D878007FE262 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5FB866E52551D878007FE262 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5FB866E72551D878007FE262 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5FB866EA2551D878007FE262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5FB866EC2551D886007FE262 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,7 +65,6 @@
 			children = (
 				5FB866F925525553007FE262 /* Podfile */,
 				5FB866E32551D878007FE262 /* AppDelegate.swift */,
-				5FB866E52551D878007FE262 /* SceneDelegate.swift */,
 				5FB866E72551D878007FE262 /* ViewController.swift */,
 				5FB866E92551D878007FE262 /* Main.storyboard */,
 				5FB866EC2551D886007FE262 /* Assets.xcassets */,
@@ -211,7 +208,6 @@
 			files = (
 				5FB866E82551D878007FE262 /* ViewController.swift in Sources */,
 				5FB866E42551D878007FE262 /* AppDelegate.swift in Sources */,
-				5FB866E62551D878007FE262 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
