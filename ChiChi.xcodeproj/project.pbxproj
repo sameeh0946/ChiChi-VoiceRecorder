@@ -13,9 +13,13 @@
 		5FB866EB2551D878007FE262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866E92551D878007FE262 /* Main.storyboard */; };
 		5FB866ED2551D886007FE262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EC2551D886007FE262 /* Assets.xcassets */; };
 		5FB866F02551D886007FE262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EE2551D886007FE262 /* LaunchScreen.storyboard */; };
+		5FB866FA25525553007FE262 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866F925525553007FE262 /* Podfile */; };
+		DB5338BB6CF9A7AB5BF76FE7 /* Pods_ChiChi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B091A93089E3A7AC0A62B8D /* Pods_ChiChi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B091A93089E3A7AC0A62B8D /* Pods_ChiChi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChiChi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D9B35984459E0F11D51286D /* Pods-ChiChi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChiChi.debug.xcconfig"; path = "Target Support Files/Pods-ChiChi/Pods-ChiChi.debug.xcconfig"; sourceTree = "<group>"; };
 		5FB866E02551D878007FE262 /* ChiChi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChiChi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FB866E32551D878007FE262 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FB866E52551D878007FE262 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		5FB866EC2551D886007FE262 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FB866EF2551D886007FE262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FB866F12551D886007FE262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FB866F925525553007FE262 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		C35C43D3A1F647F9EF7F3472 /* Pods-ChiChi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChiChi.release.xcconfig"; path = "Target Support Files/Pods-ChiChi/Pods-ChiChi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB5338BB6CF9A7AB5BF76FE7 /* Pods_ChiChi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				5FB866E22551D878007FE262 /* ChiChi */,
 				5FB866E12551D878007FE262 /* Products */,
+				E293E23FC1F296FDCEDD864C /* Pods */,
+				E438CF9D1F3A484DD6AD0FEA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +65,7 @@
 		5FB866E22551D878007FE262 /* ChiChi */ = {
 			isa = PBXGroup;
 			children = (
+				5FB866F925525553007FE262 /* Podfile */,
 				5FB866E32551D878007FE262 /* AppDelegate.swift */,
 				5FB866E52551D878007FE262 /* SceneDelegate.swift */,
 				5FB866E72551D878007FE262 /* ViewController.swift */,
@@ -67,6 +77,24 @@
 			path = ChiChi;
 			sourceTree = "<group>";
 		};
+		E293E23FC1F296FDCEDD864C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3D9B35984459E0F11D51286D /* Pods-ChiChi.debug.xcconfig */,
+				C35C43D3A1F647F9EF7F3472 /* Pods-ChiChi.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E438CF9D1F3A484DD6AD0FEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B091A93089E3A7AC0A62B8D /* Pods_ChiChi.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +102,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5FB866F42551D886007FE262 /* Build configuration list for PBXNativeTarget "ChiChi" */;
 			buildPhases = (
+				6CE95997961E89C9F4D83F22 /* [CP] Check Pods Manifest.lock */,
 				5FB866DC2551D878007FE262 /* Sources */,
 				5FB866DD2551D878007FE262 /* Frameworks */,
 				5FB866DE2551D878007FE262 /* Resources */,
+				02FC3E625B36C366B377AD24 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,11 +156,54 @@
 			files = (
 				5FB866F02551D886007FE262 /* LaunchScreen.storyboard in Resources */,
 				5FB866ED2551D886007FE262 /* Assets.xcassets in Resources */,
+				5FB866FA25525553007FE262 /* Podfile in Resources */,
 				5FB866EB2551D878007FE262 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02FC3E625B36C366B377AD24 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChiChi/Pods-ChiChi-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChiChi/Pods-ChiChi-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChiChi/Pods-ChiChi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CE95997961E89C9F4D83F22 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChiChi-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5FB866DC2551D878007FE262 /* Sources */ = {
@@ -283,6 +356,7 @@
 		};
 		5FB866F52551D886007FE262 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D9B35984459E0F11D51286D /* Pods-ChiChi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +376,7 @@
 		};
 		5FB866F62551D886007FE262 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C35C43D3A1F647F9EF7F3472 /* Pods-ChiChi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
