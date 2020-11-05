@@ -12,7 +12,6 @@
 		5FB866EB2551D878007FE262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866E92551D878007FE262 /* Main.storyboard */; };
 		5FB866ED2551D886007FE262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EC2551D886007FE262 /* Assets.xcassets */; };
 		5FB866F02551D886007FE262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EE2551D886007FE262 /* LaunchScreen.storyboard */; };
-		5FB866FA25525553007FE262 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866F925525553007FE262 /* Podfile */; };
 		DB5338BB6CF9A7AB5BF76FE7 /* Pods_ChiChi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B091A93089E3A7AC0A62B8D /* Pods_ChiChi.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +25,6 @@
 		5FB866EC2551D886007FE262 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FB866EF2551D886007FE262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FB866F12551D886007FE262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5FB866F925525553007FE262 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		C35C43D3A1F647F9EF7F3472 /* Pods-ChiChi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChiChi.release.xcconfig"; path = "Target Support Files/Pods-ChiChi/Pods-ChiChi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,7 +61,6 @@
 		5FB866E22551D878007FE262 /* ChiChi */ = {
 			isa = PBXGroup;
 			children = (
-				5FB866F925525553007FE262 /* Podfile */,
 				5FB866E32551D878007FE262 /* AppDelegate.swift */,
 				5FB866E72551D878007FE262 /* ViewController.swift */,
 				5FB866E92551D878007FE262 /* Main.storyboard */,
@@ -152,7 +149,6 @@
 			files = (
 				5FB866F02551D886007FE262 /* LaunchScreen.storyboard in Resources */,
 				5FB866ED2551D886007FE262 /* Assets.xcassets in Resources */,
-				5FB866FA25525553007FE262 /* Podfile in Resources */,
 				5FB866EB2551D878007FE262 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
