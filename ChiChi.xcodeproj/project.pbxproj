@@ -12,7 +12,7 @@
 		5FB866EB2551D878007FE262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866E92551D878007FE262 /* Main.storyboard */; };
 		5FB866ED2551D886007FE262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EC2551D886007FE262 /* Assets.xcassets */; };
 		5FB866F02551D886007FE262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EE2551D886007FE262 /* LaunchScreen.storyboard */; };
-		DB5338BB6CF9A7AB5BF76FE7 /* Pods_ChiChi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B091A93089E3A7AC0A62B8D /* Pods_ChiChi.framework */; };
+		6BFAAE002553B47D006AF49D /* Pods_ChiChi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B091A93089E3A7AC0A62B8D /* Pods_ChiChi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB5338BB6CF9A7AB5BF76FE7 /* Pods_ChiChi.framework in Frameworks */,
+				6BFAAE002553B47D006AF49D /* Pods_ChiChi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
