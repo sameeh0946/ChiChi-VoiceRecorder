@@ -2,10 +2,11 @@
 //  Data+Extentions.swift
 //  ChiChi
 //
-//  Created by Rishabh Karotiya on 07/11/20.
+//  Created by Sameeh Ahmed on 07/11/20.
 //
 
 import Foundation
+import AVFoundation
 
 extension Data {
     init(buffer: AVAudioPCMBuffer) {
@@ -27,5 +28,13 @@ extension Data {
         }
         
         return buffer
+    }
+}
+
+extension Double {
+    var toTimeString: String {
+        let seconds: Int = Int(self.truncatingRemainder(dividingBy: 60.0))
+        let minutes: Int = Int(self / 60.0)
+        return String(format: "%d:%02d", minutes, seconds)
     }
 }
