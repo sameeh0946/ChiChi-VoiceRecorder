@@ -235,7 +235,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         }
     }
     
-    // Recording Permissions
+    //MARK:-  Recording Permissions
     private func checkPermissionAndRecord() {
         let permission = AVAudioSession.sharedInstance().recordPermission
         switch permission {
@@ -267,6 +267,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         }
     }
     
+    //MARK:-  Recording Functions
     func startAudioRecorder() {
         let tapNode: AVAudioNode = audioMixerNode
         let format = tapNode.outputFormat(forBus: 0)
@@ -291,9 +292,41 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             try audioEngine.start()
             recorderState = .recording
         } catch {
-            //SHOWALERT showAlert(message: .audioEngineNotStarted)
+            //SHOWALERT MISSING showAlert(message: .audioEngineNotStarted)
         }
     }
+    
+    private func stopAudioRecorder() {
+        //Voice Recorder
+        audioMixerNode.removeTap(onBus: 0)
+        audioEngine.stop()
+        recorderState = .recordingStopped
+        
+        //Waveform
+        if let d = self.delegate {
+            d.didFinishRecording()
+        }
+        stopTimer()
+        
+        self.audioEngine.inputNode.removeTap(onBus: 0)
+        self.audioEngine.stop()
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch  let error as NSError {
+            print(error.localizedDescription)
+            return
+        }
+        self.updateUI(.recordingStopped)
+
+    }
+    
+    func stopTimer() {
+        self.timer?.invalidate()
+        self.timer = nil
+    }
+    
+    
+
     
 
     
