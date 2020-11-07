@@ -37,6 +37,7 @@ protocol RecorderViewControllerDelegate: class {
 class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
 
     //MARK:- Properties
+    //MARK:- View Properties
     var handleView = UIView()
     var playButton = UIButton()
     var recordButton = RecordButton()
@@ -48,13 +49,27 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     var delegatee: RecordingsViewControllerDelegate?
     var audioView = AudioVisualizerView()
     
+    //MARK:- Audio Properties
+    private lazy var audioEngine = AVAudioEngine()
+    private lazy var audioMixerNode: AVAudioMixerNode = {
+        let node = AVAudioMixerNode()
+        node.volume = 0
+        return node
+    }()
+    var audioBuffer = Data()
+    
+    var recordingTs: Double = 0
+    
     //MARK:- Outlets
     @IBOutlet weak var fadeView: UIView!
 
     //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //Audio engine initialization
+        initAudioEngine()
+        makeConnections()
+        //Programatic Views Setup
         setupHandelView()
         setupRecordingButton()
         setupPlayButton()
@@ -130,6 +145,55 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         audioView.isHidden = true
     }
     
+    func initAudioEngine(){
+        audioEngine.attach(audioMixerNode)
+        makeConnections()
+        audioEngine.prepare()
+    }
+    
+    func makeConnections() {
+        let inputNode = audioEngine.inputNode
+        let inputFormat = inputNode.outputFormat(forBus: 0)
+        audioEngine.connect(inputNode,
+                            to: audioMixerNode,
+                            format: inputFormat)
+        
+        let mainMixerNode = audioEngine.mainMixerNode
+        let mixerFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32,
+                                        sampleRate: inputFormat.sampleRate,
+                                        channels: inputFormat.channelCount,
+                                        interleaved: false)
+        audioEngine.connect(audioMixerNode, to: mainMixerNode, format: mixerFormat)
+    }
+    
+    private func updateUI(_ recorderState: RecorderState) {
+        switch recorderState {
+        case .recording:
+            UIApplication.shared.isIdleTimerDisabled = true
+            self.audioView.isHidden = false
+            self.timeLabel.isHidden = false
+            break
+        case .recordingStopped:
+            UIApplication.shared.isIdleTimerDisabled = false
+            self.audioView.isHidden = true
+            //self.timeLabel.isHidden = true
+            break
+        case .denied:
+            UIApplication.shared.isIdleTimerDisabled = false
+            self.recordButton.isHidden = true
+            self.audioView.isHidden = true
+            self.timeLabel.isHidden = true
+            break
+        case .notInitiated:
+            break
+        case .playing:
+            break
+        case .playingStopped:
+            
+            break
+        }
+    }
+    
     //MARK:- Play / Record Tap functions
     @objc func handlePlay(_ sender: UIButton) {
         print("handlePlay")
@@ -152,7 +216,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                 self.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.bounds.width, height: -300)
                 self.view.layoutIfNeeded()
             }, completion: nil)
-            //self.checkPermissionAndRecord()
+            self.checkPermissionAndRecord()
         } else {
             
             playButton.isEnabled = true
@@ -170,6 +234,68 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             //stopAudioRecorder()
         }
     }
+    
+    // Recording Permissions
+    private func checkPermissionAndRecord() {
+        let permission = AVAudioSession.sharedInstance().recordPermission
+        switch permission {
+        case .undetermined:
+            AVAudioSession.sharedInstance().requestRecordPermission({ (result) in
+                DispatchQueue.main.async {
+                    if result {
+                        self.audioBuffer.removeAll()
+                        self.startAudioRecorder()
+                        //self.startRecording()
+                    }
+                    else {
+                        self.recorderState = .denied
+                        self.updateUI(.denied)
+                    }
+                }
+            })
+            break
+        case .granted:
+            
+            self.audioBuffer.removeAll()
+            self.startAudioRecorder()
+            //self.startRecording()
+            break
+        case .denied:
+            
+            self.updateUI(.denied)
+            break
+        }
+    }
+    
+    func startAudioRecorder() {
+        let tapNode: AVAudioNode = audioMixerNode
+        let format = tapNode.outputFormat(forBus: 0)
+        self.recordingTs = NSDate().timeIntervalSince1970
+        
+        tapNode.installTap(onBus: 0,
+                           bufferSize: AVAudioFrameCount(4096),
+                           format: format) { (buffer, time) in
+            let ts = NSDate().timeIntervalSince1970
+            DispatchQueue.main.async {
+                
+                let seconds = (ts - self.recordingTs)
+                print("2seconds \(seconds)")
+                self.timeLabel.text = seconds.toTimeString
+            }
+            
+            let data = Data(buffer: buffer)
+            self.audioBuffer.append(data)
+        }
+        
+        do {
+            try audioEngine.start()
+            recorderState = .recording
+        } catch {
+            //SHOWALERT showAlert(message: .audioEngineNotStarted)
+        }
+    }
+    
+
     
     
     
