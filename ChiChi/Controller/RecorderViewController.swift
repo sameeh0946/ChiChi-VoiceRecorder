@@ -88,7 +88,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     
     fileprivate func setupRecordingButton() {
         recordButton.isRecording = false
-        //recordButton.addTarget(self, action: #selector(handleRecording(_:)), for: .touchUpInside)
+        recordButton.addTarget(self, action: #selector(handleRecording(_:)), for: .touchUpInside)
         view.addSubview(recordButton)
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         recordButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32).isActive = true
@@ -99,7 +99,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     
     fileprivate func setupPlayButton() {
         playButton.translatesAutoresizingMaskIntoConstraints = false
-        //playButton.addTarget(self, action: #selector(handlePlay(_:)), for: .touchUpInside)
+        playButton.addTarget(self, action: #selector(handlePlay(_:)), for: .touchUpInside)
         view.addSubview(playButton)
         playButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32).isActive = true
         playButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
@@ -128,6 +128,47 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         audioView.topAnchor.constraint(equalTo: fadeView.topAnchor,constant: -30).isActive = true
         audioView.alpha = 0
         audioView.isHidden = true
+    }
+    
+    //MARK:- Play / Record Tap functions
+    @objc func handlePlay(_ sender: UIButton) {
+        print("handlePlay")
+        
+    }
+    
+    @objc func handleRecording(_ sender: UIButton) {
+        print("handleRecord")
+        
+        var defaultFrame: CGRect = CGRect(x: 0, y: 24, width: view.frame.width, height: 135)
+        //stopAudioPlayer()
+        if recordButton.isRecording {
+            playButton.isEnabled = false
+            defaultFrame = self.view.frame
+            audioView.isHidden = false
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.handleView.alpha = 1
+                self.timeLabel.alpha = 1
+                self.audioView.alpha = 1
+                self.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.bounds.width, height: -300)
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            //self.checkPermissionAndRecord()
+        } else {
+            
+            playButton.isEnabled = true
+            audioView.isHidden = true
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.handleView.alpha = 0
+                self.timeLabel.alpha = 0
+                self.audioView.alpha = 0
+                self.view.frame = defaultFrame
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            recorderState = .recordingStopped
+            //self.stopRecording()
+            //stopAudioRecorder()
+        }
     }
     
     
