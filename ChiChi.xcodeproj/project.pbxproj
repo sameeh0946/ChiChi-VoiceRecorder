@@ -14,6 +14,8 @@
 		5FB866F02551D886007FE262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EE2551D886007FE262 /* LaunchScreen.storyboard */; };
 		6BEFB51F25568CAF007CB6BB /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFB51E25568CAF007CB6BB /* RecordButton.swift */; };
 		6BEFB52225568CCD007CB6BB /* RecordButtonKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFB52125568CCD007CB6BB /* RecordButtonKit.swift */; };
+		6BEFB53325569350007CB6BB /* StopRecording.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 6BEFB53225569350007CB6BB /* StopRecording.aiff */; };
+		6BEFB53625569355007CB6BB /* StartRecording.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 6BEFB53525569355007CB6BB /* StartRecording.aiff */; };
 		6BFAAE002553B47D006AF49D /* Pods_ChiChi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B091A93089E3A7AC0A62B8D /* Pods_ChiChi.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,8 @@
 		6BEFB51E25568CAF007CB6BB /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		6BEFB52125568CCD007CB6BB /* RecordButtonKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButtonKit.swift; sourceTree = "<group>"; };
 		6BEFB52E25568FF9007CB6BB /* ChiChi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChiChi-Bridging-Header.h"; sourceTree = "<group>"; };
+		6BEFB53225569350007CB6BB /* StopRecording.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = StopRecording.aiff; sourceTree = "<group>"; };
+		6BEFB53525569355007CB6BB /* StartRecording.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = StartRecording.aiff; sourceTree = "<group>"; };
 		C35C43D3A1F647F9EF7F3472 /* Pods-ChiChi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChiChi.release.xcconfig"; path = "Target Support Files/Pods-ChiChi/Pods-ChiChi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,11 +73,11 @@
 				5FB866E32551D878007FE262 /* AppDelegate.swift */,
 				5FB866E72551D878007FE262 /* ViewController.swift */,
 				5FB866E92551D878007FE262 /* Main.storyboard */,
-				5FB866EC2551D886007FE262 /* Assets.xcassets */,
 				5FB866EE2551D886007FE262 /* LaunchScreen.storyboard */,
-				5FB866F12551D886007FE262 /* Info.plist */,
 				6BEFB52425568CD8007CB6BB /* RecordingButton */,
+				5FB866F12551D886007FE262 /* Info.plist */,
 				6BEFB52E25568FF9007CB6BB /* ChiChi-Bridging-Header.h */,
+				6BEFB539255693E3007CB6BB /* Resources */,
 			);
 			path = ChiChi;
 			sourceTree = "<group>";
@@ -85,6 +89,24 @@
 				6BEFB52125568CCD007CB6BB /* RecordButtonKit.swift */,
 			);
 			path = RecordingButton;
+			sourceTree = "<group>";
+		};
+		6BEFB5382556935D007CB6BB /* Sound-Effects */ = {
+			isa = PBXGroup;
+			children = (
+				6BEFB53225569350007CB6BB /* StopRecording.aiff */,
+				6BEFB53525569355007CB6BB /* StartRecording.aiff */,
+			);
+			path = "Sound-Effects";
+			sourceTree = "<group>";
+		};
+		6BEFB539255693E3007CB6BB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6BEFB5382556935D007CB6BB /* Sound-Effects */,
+				5FB866EC2551D886007FE262 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		E293E23FC1F296FDCEDD864C /* Pods */ = {
@@ -164,6 +186,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FB866F02551D886007FE262 /* LaunchScreen.storyboard in Resources */,
+				6BEFB53325569350007CB6BB /* StopRecording.aiff in Resources */,
+				6BEFB53625569355007CB6BB /* StartRecording.aiff in Resources */,
 				5FB866ED2551D886007FE262 /* Assets.xcassets in Resources */,
 				5FB866EB2551D878007FE262 /* Main.storyboard in Resources */,
 			);
