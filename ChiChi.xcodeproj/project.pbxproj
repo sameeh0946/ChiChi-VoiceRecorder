@@ -84,8 +84,7 @@
 			children = (
 				5FB866E32551D878007FE262 /* AppDelegate.swift */,
 				6BEFB53D255699EB007CB6BB /* Controller */,
-				5FB866E92551D878007FE262 /* Main.storyboard */,
-				5FB866EE2551D886007FE262 /* LaunchScreen.storyboard */,
+				6BEFB5732556D44A007CB6BB /* View */,
 				6BEFB52425568CD8007CB6BB /* RecordingButton */,
 				5FB866F12551D886007FE262 /* Info.plist */,
 				6BEFB52E25568FF9007CB6BB /* ChiChi-Bridging-Header.h */,
@@ -166,6 +165,15 @@
 				6BEFB55A2556C6AC007CB6BB /* Constants.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6BEFB5732556D44A007CB6BB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5FB866EE2551D886007FE262 /* LaunchScreen.storyboard */,
+				5FB866E92551D878007FE262 /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E293E23FC1F296FDCEDD864C /* Pods */ = {

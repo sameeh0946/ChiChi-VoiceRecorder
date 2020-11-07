@@ -31,8 +31,6 @@ final class RecorderViewModel {
     func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
         return input.rawValue
     }
-    
 
-    
 
 }
