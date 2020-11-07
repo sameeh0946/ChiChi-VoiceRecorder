@@ -17,6 +17,7 @@
 		6BEFB53325569350007CB6BB /* StopRecording.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 6BEFB53225569350007CB6BB /* StopRecording.aiff */; };
 		6BEFB53625569355007CB6BB /* StartRecording.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 6BEFB53525569355007CB6BB /* StartRecording.aiff */; };
 		6BEFB53F25569A1F007CB6BB /* RecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFB53E25569A1F007CB6BB /* RecorderViewController.swift */; };
+		6BEFB5442556A10A007CB6BB /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFB5432556A10A007CB6BB /* AudioVisualizerView.swift */; };
 		6BFAAE002553B47D006AF49D /* Pods_ChiChi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B091A93089E3A7AC0A62B8D /* Pods_ChiChi.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		6BEFB53225569350007CB6BB /* StopRecording.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = StopRecording.aiff; sourceTree = "<group>"; };
 		6BEFB53525569355007CB6BB /* StartRecording.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = StartRecording.aiff; sourceTree = "<group>"; };
 		6BEFB53E25569A1F007CB6BB /* RecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewController.swift; sourceTree = "<group>"; };
+		6BEFB5432556A10A007CB6BB /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
 		C35C43D3A1F647F9EF7F3472 /* Pods-ChiChi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChiChi.release.xcconfig"; path = "Target Support Files/Pods-ChiChi/Pods-ChiChi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 				5FB866F12551D886007FE262 /* Info.plist */,
 				6BEFB52E25568FF9007CB6BB /* ChiChi-Bridging-Header.h */,
 				6BEFB539255693E3007CB6BB /* Resources */,
+				6BEFB5462556A10E007CB6BB /* Custom Views */,
 			);
 			path = ChiChi;
 			sourceTree = "<group>";
@@ -118,6 +121,14 @@
 				6BEFB53E25569A1F007CB6BB /* RecorderViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		6BEFB5462556A10E007CB6BB /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				6BEFB5432556A10A007CB6BB /* AudioVisualizerView.swift */,
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		E293E23FC1F296FDCEDD864C /* Pods */ = {
@@ -256,6 +267,7 @@
 				5FB866E82551D878007FE262 /* MainViewController.swift in Sources */,
 				5FB866E42551D878007FE262 /* AppDelegate.swift in Sources */,
 				6BEFB51F25568CAF007CB6BB /* RecordButton.swift in Sources */,
+				6BEFB5442556A10A007CB6BB /* AudioVisualizerView.swift in Sources */,
 				6BEFB53F25569A1F007CB6BB /* RecorderViewController.swift in Sources */,
 				6BEFB52225568CCD007CB6BB /* RecordButtonKit.swift in Sources */,
 			);
