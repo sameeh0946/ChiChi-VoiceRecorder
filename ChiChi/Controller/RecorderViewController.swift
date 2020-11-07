@@ -49,6 +49,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     var delegatee: RecordingsViewControllerDelegate?
     var audioView = AudioVisualizerView()
     var timer: Timer?
+    private var viewModel = RecorderViewModel()
     
     //MARK:- Audio Properties
     private lazy var audioEngine = AVAudioEngine()
@@ -205,7 +206,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         print("handleRecord")
         
         var defaultFrame: CGRect = CGRect(x: 0, y: 24, width: view.frame.width, height: 135)
-        //stopAudioPlayer()
+
         if recordButton.isRecording {
             playButton.isEnabled = false
             defaultFrame = self.view.frame
@@ -231,8 +232,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                 self.view.layoutIfNeeded()
             }, completion: nil)
             recorderState = .recordingStopped
-            //self.stopRecording()
-            //stopAudioRecorder()
+            self.stopAudioRecorder()
         }
     }
     
@@ -320,7 +320,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             self.recorder.delegate = self
             self.recorder.isMeteringEnabled = true
             
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.record)))
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: viewModel.convertFromAVAudioSessionCategory(AVAudioSession.Category.record)))
             self.recorder.record()
         }
         catch {
@@ -328,7 +328,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         }
         
         let inputNode = self.audioEngine.inputNode
-        guard let format = self.format() else {
+        guard let format = viewModel.format() else {
             return
         }
         
@@ -371,8 +371,16 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         self.timer?.invalidate()
         self.timer = nil
     }
-    
-    
+    //MARK:-  Calculating amplitude of the maveform
+    @objc internal func refreshAudioView(_: Timer) {
+        // Set the amplitude to whatever you need and the view will update itself.
+        self.audioView.amplitude = 0.5
+        recorder.updateMeters()
+        let normalizedValue:CGFloat = pow(10, CGFloat(recorder.averagePower(forChannel: 0))/20)
+        self.audioView.amplitude = normalizedValue
+        print("refreshAudioView normalizedValue : \(normalizedValue)")
+    }
+
 
     
 
