@@ -199,7 +199,36 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     //MARK:- Play / Record Tap functions
     @objc func handlePlay(_ sender: UIButton) {
         print("handlePlay")
-        
+        switch recorderState {
+         case .notInitiated:
+             break
+         //showAlert(message: .noRecordingPlayTapped)
+         case .recording:
+             break
+         //showAlert(message: .inRecordingPlayTapped)
+         case .recordingStopped:
+             //coinvert and write only if user has recorded a video and after that play the recording
+             guard let audioFileURL = writeToFile() else {
+                 //showAlert(message: .writingAudioToFileFail)
+                 return
+             }
+             
+             do {
+                 audioPlayer = try AVAudioPlayer(contentsOf: audioFileURL)
+                 startAudioPlayer()
+             } catch {
+                 //showAlert(message: .audioPlayerError)
+             }
+     
+         case .playing:
+             break
+             
+         case .denied:
+             break
+         case .playingStopped:
+             startAudioPlayer()
+         }
+
     }
     
     @objc func handleRecording(_ sender: UIButton) {
@@ -381,8 +410,55 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         print("refreshAudioView normalizedValue : \(normalizedValue)")
     }
 
-
+    func writeToFile() -> URL? {
+        guard let audioFileURL = viewModel.getAudioFileURL else {
+           // showAlert(message: .storageFileUrl)
+            return nil
+        }
+    // byte array is converted which will be used to get the wav file
+    let inputFormat = audioEngine.inputNode.outputFormat(forBus: 0)
+    guard let format = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
+                                     sampleRate: inputFormat.sampleRate,
+                                     channels: inputFormat.channelCount,
+                                     interleaved: false),
+          let buffer = audioBuffer.toPCMBuffer(format: format)
+    else {
+        //MissingshowAlert(message: .audioFormatFail)
+        return nil
+    }
+    var audioFile: AVAudioFile?
+    do {
+        audioFile = try getAudioFile(audioFileURL: audioFileURL, settings: format.settings)
+    } catch {
+        //MissingshowAlert(message: .audioFileNotCreated)
+        return nil
+    }
+    do {
+        // converted byte array is now converted into wav format
+        try viewModel.writeToAudioFile(audioFile, audioBuffer: buffer)
+    } catch {
+        print(error)
+    }
+    // audioFileURL contains the path of the wav file
+    return audioFileURL
+}
     
+    private func startAudioPlayer() {
+        audioPlayer.play()
+        recorderState = .playing
+        audioPlayer.delegate = self
+        audioPlayer.prepareToPlay()
+        audioPlayer.isMeteringEnabled = true
+        audioPlayer.play()
+    }
+
+    func getAudioFile(audioFileURL: URL, settings: [String: Any]) throws -> AVAudioFile? {
+        return try AVAudioFile(forWriting: audioFileURL,
+                               settings: settings,
+                               commonFormat: .pcmFormatFloat32,
+                               interleaved: false)
+    }
+
 
     
     
