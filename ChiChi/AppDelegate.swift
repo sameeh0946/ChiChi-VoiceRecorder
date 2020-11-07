@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  ChiChi
 //
-//  Created by Tauheed Ahmed on 03/11/20.
+//  Created by Sameeh Ahmed on 03/11/20.
 //
 
 import UIKit
