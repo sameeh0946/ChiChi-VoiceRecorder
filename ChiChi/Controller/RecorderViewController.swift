@@ -48,6 +48,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     weak var delegate: RecorderViewControllerDelegate?
     var delegatee: RecordingsViewControllerDelegate?
     var audioView = AudioVisualizerView()
+    var timer: Timer?
     
     //MARK:- Audio Properties
     private lazy var audioEngine = AVAudioEngine()
@@ -245,7 +246,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                     if result {
                         self.audioBuffer.removeAll()
                         self.startAudioRecorder()
-                        //self.startRecording()
+                        self.startRecording()
                     }
                     else {
                         self.recorderState = .denied
@@ -258,16 +259,19 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             
             self.audioBuffer.removeAll()
             self.startAudioRecorder()
-            //self.startRecording()
+            self.startRecording()
             break
         case .denied:
             
             self.updateUI(.denied)
             break
+        @unknown default:
+            break
         }
     }
     
     //MARK:-  Recording Functions
+    //MARK:-  Audio record for Time Label and audio record for playblack
     func startAudioRecorder() {
         let tapNode: AVAudioNode = audioMixerNode
         let format = tapNode.outputFormat(forBus: 0)
@@ -295,7 +299,50 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             //SHOWALERT MISSING showAlert(message: .audioEngineNotStarted)
         }
     }
+    //MARK:-  Audio record for audio buffer for waveform
+    private func startRecording() {
+        self.audioView.density = 1.0
+        self.audioView.waveColor = UIColor.blue
+        if self.recorder != nil {
+            return
+        }
+        
+        let url: NSURL = NSURL(fileURLWithPath: "/dev/null")
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+        
+        do {
+            self.recorder = try AVAudioRecorder(url: url as URL, settings: settings )
+            self.recorder.delegate = self
+            self.recorder.isMeteringEnabled = true
+            
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.record)))
+            self.recorder.record()
+        }
+        catch {
+            print("Fail to record.")
+        }
+        
+        let inputNode = self.audioEngine.inputNode
+        guard let format = self.format() else {
+            return
+        }
+        
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, time) in
+            
+            DispatchQueue.main.async {
+                self.timer = Timer.scheduledTimer(timeInterval: 0.009, target: self, selector: #selector(self.refreshAudioView(_:)), userInfo: nil, repeats: true)
+            }
+        }
+        self.updateUI(.recording)
+    }
     
+    
+    //MARK:-  Stop Both Time Label and audio record for playblack and audio buffer for waveform
     private func stopAudioRecorder() {
         //Voice Recorder
         audioMixerNode.removeTap(onBus: 0)
