@@ -11,6 +11,12 @@ import AVFoundation
 
 final class RecorderViewModel {
     
+    var getAudioFileURL: URL? {
+        let docDirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        return docDirURL?.appendingPathComponent("name.wav", isDirectory: false)
+    }
+    
+    
     let settings = [AVFormatIDKey: kAudioFormatLinearPCM, AVLinearPCMBitDepthKey: 16, AVLinearPCMIsFloatKey: true, AVSampleRateKey: Float64(44100), AVNumberOfChannelsKey: 1] as [String : Any]
     
     func format() -> AVAudioFormat? {
