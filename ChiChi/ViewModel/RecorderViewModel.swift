@@ -16,6 +16,10 @@ final class RecorderViewModel {
         return docDirURL?.appendingPathComponent("name.wav", isDirectory: false)
     }
     
+    func writeToAudioFile(_ audioFile: AVAudioFile?, audioBuffer: AVAudioPCMBuffer) throws {
+        try audioFile?.write(from: audioBuffer)
+    }
+    
     
     let settings = [AVFormatIDKey: kAudioFormatLinearPCM, AVLinearPCMBitDepthKey: 16, AVLinearPCMIsFloatKey: true, AVSampleRateKey: Float64(44100), AVNumberOfChannelsKey: 1] as [String : Any]
     
