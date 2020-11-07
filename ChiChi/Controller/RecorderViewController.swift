@@ -428,7 +428,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     }
     var audioFile: AVAudioFile?
     do {
-        audioFile = try viewModel.getAudioFile(audioFileURL: audioFileURL, settings: format.settings)
+        audioFile = try getAudioFile(audioFileURL: audioFileURL, settings: format.settings)
     } catch {
         //MissingshowAlert(message: .audioFileNotCreated)
         return nil
@@ -452,8 +452,13 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         audioPlayer.play()
     }
 
+    func getAudioFile(audioFileURL: URL, settings: [String: Any]) throws -> AVAudioFile? {
+        return try AVAudioFile(forWriting: audioFileURL,
+                               settings: settings,
+                               commonFormat: .pcmFormatFloat32,
+                               interleaved: false)
+    }
 
-    
 
     
     
