@@ -46,6 +46,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     var recorderState: RecorderState = .notInitiated
     weak var delegate: RecorderViewControllerDelegate?
     var delegatee: RecordingsViewControllerDelegate?
+    var audioView = AudioVisualizerView()
     
     //MARK:- Outlets
     @IBOutlet weak var fadeView: UIView!
@@ -58,12 +59,9 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         setupRecordingButton()
         setupPlayButton()
         setupTimeLabel()
-        //setupAudioView()
-        
+        setupAudioView()
+        audioView.amplitude = 0
     }
-    
-
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -75,7 +73,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         print("viewWillDisappear")
     }
     
-    //MARK:- Setup Methods
+    //MARK:- UI Views Programatic Setup Methods
     fileprivate func setupHandelView() {
         handleView.layer.cornerRadius = 2.5
         handleView.backgroundColor = UIColor.black
@@ -121,15 +119,17 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         timeLabel.alpha = 0
     }
     
-//    fileprivate func setupAudioView() {
-//        view.addSubview(audioView)
-//        audioView.translatesAutoresizingMaskIntoConstraints = false
-//        audioView.leadingAnchor.constraint(equalTo: fadeView.leadingAnchor).isActive = true
-//        audioView.trailingAnchor.constraint(equalTo: fadeView.trailingAnchor).isActive = true
-//        audioView.bottomAnchor.constraint(equalTo: recordButton.topAnchor, constant: -50).isActive = true
-//        audioView.topAnchor.constraint(equalTo: fadeView.topAnchor,constant: -30).isActive = true
-//        //TODO: Add autolayout constraints
-//        audioView.alpha = 0
-//        audioView.isHidden = true
-//    }
+    fileprivate func setupAudioView() {
+        view.addSubview(audioView)
+        audioView.translatesAutoresizingMaskIntoConstraints = false
+        audioView.leadingAnchor.constraint(equalTo: fadeView.leadingAnchor).isActive = true
+        audioView.trailingAnchor.constraint(equalTo: fadeView.trailingAnchor).isActive = true
+        audioView.bottomAnchor.constraint(equalTo: recordButton.topAnchor, constant: -50).isActive = true
+        audioView.topAnchor.constraint(equalTo: fadeView.topAnchor,constant: -30).isActive = true
+        audioView.alpha = 0
+        audioView.isHidden = true
+    }
+    
+    
+    
 }
