@@ -2,19 +2,14 @@
 //  Constants.swift
 //  ChiChi
 //
-//  Created by Rishabh Karotiya on 07/11/20.
+//  Created by Sameeh Ahmed on 07/11/20.
 //
 import AVFoundation
 
 struct Constants {
     
-//    struct Waveform {
-//        static let numberOfMiniWaves = 5
-//        static let defaultScale: Float = 0.4
-//    }
-    
     struct AudioFile {
-        static let name = "recording"
+        static let name = "recordingFile"
         static let fileExtension = "wav"
     }
     

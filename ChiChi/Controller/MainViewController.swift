@@ -26,26 +26,11 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if let recorder = self.recorderViewController {
-            recorder.delegate = self
-        }
-//        if let recordings = self.recordingsViewController {
-//            recordings.delegate = self
-//        }
 
     }
 
 }
 
-extension MainViewController: RecorderViewControllerDelegate {
-    func didStartRecording() {
-
-    }
-    
-    func didFinishRecording() {
-
-    }
-}
 
 extension MainViewController: RecordingsViewControllerDelegate {
     func didStartPlayback() {

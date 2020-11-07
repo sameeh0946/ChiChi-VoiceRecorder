@@ -9,30 +9,6 @@ import UIKit
 import AVFoundation
 import Accelerate
 
-struct Recording {
-    var name: String
-    var path: URL
-}
-
-protocol RecordingsViewControllerDelegate: class {
-    func didStartPlayback()
-    func didFinishPlayback()
-}
-
-enum RecorderState {
-    case recording
-    case recordingStopped
-    case denied
-    case notInitiated
-    case playing
-    case playingStopped
-}
-
-protocol RecorderViewControllerDelegate: class {
-    func didStartRecording()
-    func didFinishRecording()
-}
-
 
 class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
 
@@ -45,11 +21,9 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     var audioPlayer = AVAudioPlayer()
     var recorder: AVAudioRecorder!
     var recorderState: RecorderState = .notInitiated
-    weak var delegate: RecorderViewControllerDelegate?
-    var delegatee: RecordingsViewControllerDelegate?
     var audioView = AudioVisualizerView()
     var timer: Timer?
-    private var viewModel = RecorderViewModel()
+    private var recorderViewHelper = RecorderViewHelper()
     
     //MARK:- Audio Properties
     private lazy var audioEngine = AVAudioEngine()
@@ -349,7 +323,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             self.recorder.delegate = self
             self.recorder.isMeteringEnabled = true
             
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: viewModel.convertFromAVAudioSessionCategory(AVAudioSession.Category.record)))
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: recorderViewHelper.convertFromAVAudioSessionCategory(AVAudioSession.Category.record)))
             self.recorder.record()
         }
         catch {
@@ -357,7 +331,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         }
         
         let inputNode = self.audioEngine.inputNode
-        guard let format = viewModel.format() else {
+        guard let format = recorderViewHelper.format() else {
             return
         }
         
@@ -379,9 +353,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         recorderState = .recordingStopped
         
         //Waveform
-        if let d = self.delegate {
-            d.didFinishRecording()
-        }
         stopTimer()
         
         self.audioEngine.inputNode.removeTap(onBus: 0)
@@ -411,7 +382,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     }
 
     func writeToFile() -> URL? {
-        guard let audioFileURL = viewModel.getAudioFileURL else {
+        guard let audioFileURL = recorderViewHelper.getAudioFileURL else {
            // showAlert(message: .storageFileUrl)
             return nil
         }
@@ -435,7 +406,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     }
     do {
         // converted byte array is now converted into wav format
-        try viewModel.writeToAudioFile(audioFile, audioBuffer: buffer)
+        try recorderViewHelper.writeToAudioFile(audioFile, audioBuffer: buffer)
     } catch {
         print(error)
     }
@@ -459,8 +430,5 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                                interleaved: false)
     }
 
-
-    
-    
     
 }

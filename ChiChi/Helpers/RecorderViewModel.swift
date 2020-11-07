@@ -9,11 +9,11 @@ import Foundation
 import AVFoundation
 
 
-final class RecorderViewModel {
+final class RecorderViewHelper {
     
     var getAudioFileURL: URL? {
         let docDirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        return docDirURL?.appendingPathComponent("name.wav", isDirectory: false)
+        return docDirURL?.appendingPathComponent("\(Constants.AudioFile.name).\(Constants.AudioFile.fileExtension)", isDirectory: false)
     }
     
     func writeToAudioFile(_ audioFile: AVAudioFile?, audioBuffer: AVAudioPCMBuffer) throws {
@@ -33,6 +33,7 @@ final class RecorderViewModel {
     }
     
 
-    
-
 }
+
+
+
