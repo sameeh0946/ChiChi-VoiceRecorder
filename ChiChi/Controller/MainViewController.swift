@@ -11,11 +11,6 @@ import UIKit
 class MainViewController: UIViewController {
 
     //MARK:- Properties
-//    private var recordingsViewController: RecordingsViewController? {
-//        get {
-//            return children.compactMap({ $0 as? RecordingsViewController }).first
-//        }
-//    }
     
     private var recorderViewController: RecorderViewController? {
         get {

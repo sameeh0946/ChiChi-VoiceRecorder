@@ -61,10 +61,10 @@
             </objects>
             <point key="canvasLocation" x="-197.10144927536234" y="93.75"/>
         </scene>
-        <!--View Controller-->
+        <!--Recorder View Controller-->
         <scene sceneID="0Wz-DW-xrc">
             <objects>
-                <viewController id="n17-nY-fz1" sceneMemberID="viewController">
+                <viewController id="n17-nY-fz1" customClass="RecorderViewController" customModule="ChiChi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Gv-mY-UCT">
                         <rect key="frame" x="0.0" y="0.0" width="354" height="175"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,6 +83,9 @@
                             <constraint firstAttribute="bottom" secondItem="i9D-k7-KEM" secondAttribute="bottom" id="qfI-ck-Iat"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fadeView" destination="i9D-k7-KEM" id="CPb-tz-rNz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eh0-9V-Ekp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
