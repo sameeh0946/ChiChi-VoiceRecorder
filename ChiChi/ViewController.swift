@@ -1,19 +1,77 @@
 //
-//  ViewController.swift
-//  ChiChi
+//  MainViewController.swift
+//  VoiceMemosClone
 //
-//  Created by Sameeh Ahmed on 03/11/20.
-//
+//  Created by Sameeh Ahmed on 6/11/20.
+
 
 import UIKit
 
-class ViewController: UIViewController {
 
+class MainViewController: UIViewController {
+
+    //MARK:- Properties
+//    private var recordingsViewController: RecordingsViewController? {
+//        get {
+//            return children.compactMap({ $0 as? RecordingsViewController }).first
+//        }
+//    }
+    
+    private var recorderViewController: RecorderViewController? {
+        get {
+            return children.compactMap({ $0 as? RecorderViewController }).first
+        }
+    }
+    
+    //MARK:- Outlets
+//    @IBOutlet weak var recordingsView: UIView!
+    @IBOutlet weak var recorderView: UIView!
+    
+    //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
+        if let recorder = self.recorderViewController {
+            recorder.delegate = self
+        }
+//        if let recordings = self.recordingsViewController {
+//            recordings.delegate = self
+//        }
 
+    }
 
 }
 
+extension MainViewController: RecorderViewControllerDelegate {
+    func didStartRecording() {
+
+    }
+    
+    func didFinishRecording() {
+
+    }
+}
+
+extension MainViewController: RecordingsViewControllerDelegate {
+    func didStartPlayback() {
+        if let recorder = self.recorderViewController {
+            recorder.fadeView.isHidden = false
+            UIView.animate(withDuration: 0.25, animations: {
+                recorder.fadeView.alpha = 1
+            })
+        }
+    }
+    
+    func didFinishPlayback() {
+        if let recorder = self.recorderViewController {
+            recorder.view.isUserInteractionEnabled = true
+            UIView.animate(withDuration: 0.25, animations: {
+                recorder.fadeView.alpha = 0
+            }, completion: { (finished) in
+                if finished {
+                    recorder.fadeView.isHidden = true
+                }
+            })
+        }
+    }
+}

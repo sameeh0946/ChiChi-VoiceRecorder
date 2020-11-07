@@ -28,13 +28,13 @@
         <!--Record to see waveform-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ChiChi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="ChiChi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yda-Zo-Hax">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4Y-6b-edj">
-                                <rect key="frame" x="30" y="361" width="354" height="175"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4Y-6b-edj" userLabel="Recorder View">
+                                <rect key="frame" x="30" y="360.5" width="354" height="175"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="175" id="7UI-BO-nVo"/>
                                 </constraints>
@@ -53,6 +53,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Record to see waveform" id="Urc-7W-oXr"/>
+                    <connections>
+                        <outlet property="recorderView" destination="A4Y-6b-edj" id="WN3-ZS-xht"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -71,6 +74,7 @@
                                 <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="gUr-1H-gGx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="i9D-k7-KEM" secondAttribute="trailing" id="Mtk-sV-PKt"/>
