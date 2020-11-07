@@ -85,7 +85,6 @@
 				5FB866E32551D878007FE262 /* AppDelegate.swift */,
 				6BEFB53D255699EB007CB6BB /* Controller */,
 				6BEFB5732556D44A007CB6BB /* View */,
-				6BEFB52425568CD8007CB6BB /* RecordingButton */,
 				5FB866F12551D886007FE262 /* Info.plist */,
 				6BEFB52E25568FF9007CB6BB /* ChiChi-Bridging-Header.h */,
 				6BEFB539255693E3007CB6BB /* Resources */,
@@ -93,6 +92,7 @@
 				6BEFB54D2556ACF4007CB6BB /* ViewModel */,
 				6BEFB5522556AF96007CB6BB /* Extentions */,
 				5FB866E12551D878007FE262 /* Products */,
+				6BEFB52425568CD8007CB6BB /* RecordingButton */,
 				6BEFB56B2556D1BD007CB6BB /* Helpers */,
 			);
 			path = ChiChi;

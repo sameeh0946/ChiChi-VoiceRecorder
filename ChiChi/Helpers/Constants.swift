@@ -9,7 +9,7 @@ import AVFoundation
 struct Constants {
     
     struct AudioFile {
-        static let name = "recording"
+        static let name = "recordingFile"
         static let fileExtension = "wav"
     }
     
