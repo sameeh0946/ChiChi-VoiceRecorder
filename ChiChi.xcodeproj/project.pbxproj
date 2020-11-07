@@ -12,6 +12,8 @@
 		5FB866EB2551D878007FE262 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866E92551D878007FE262 /* Main.storyboard */; };
 		5FB866ED2551D886007FE262 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EC2551D886007FE262 /* Assets.xcassets */; };
 		5FB866F02551D886007FE262 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FB866EE2551D886007FE262 /* LaunchScreen.storyboard */; };
+		6BEFB51F25568CAF007CB6BB /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFB51E25568CAF007CB6BB /* RecordButton.swift */; };
+		6BEFB52225568CCD007CB6BB /* RecordButtonKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFB52125568CCD007CB6BB /* RecordButtonKit.swift */; };
 		6BFAAE002553B47D006AF49D /* Pods_ChiChi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B091A93089E3A7AC0A62B8D /* Pods_ChiChi.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +27,9 @@
 		5FB866EC2551D886007FE262 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FB866EF2551D886007FE262 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FB866F12551D886007FE262 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BEFB51E25568CAF007CB6BB /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		6BEFB52125568CCD007CB6BB /* RecordButtonKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButtonKit.swift; sourceTree = "<group>"; };
+		6BEFB52E25568FF9007CB6BB /* ChiChi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChiChi-Bridging-Header.h"; sourceTree = "<group>"; };
 		C35C43D3A1F647F9EF7F3472 /* Pods-ChiChi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChiChi.release.xcconfig"; path = "Target Support Files/Pods-ChiChi/Pods-ChiChi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,8 +72,19 @@
 				5FB866EC2551D886007FE262 /* Assets.xcassets */,
 				5FB866EE2551D886007FE262 /* LaunchScreen.storyboard */,
 				5FB866F12551D886007FE262 /* Info.plist */,
+				6BEFB52425568CD8007CB6BB /* RecordingButton */,
+				6BEFB52E25568FF9007CB6BB /* ChiChi-Bridging-Header.h */,
 			);
 			path = ChiChi;
+			sourceTree = "<group>";
+		};
+		6BEFB52425568CD8007CB6BB /* RecordingButton */ = {
+			isa = PBXGroup;
+			children = (
+				6BEFB51E25568CAF007CB6BB /* RecordButton.swift */,
+				6BEFB52125568CCD007CB6BB /* RecordButtonKit.swift */,
+			);
+			path = RecordingButton;
 			sourceTree = "<group>";
 		};
 		E293E23FC1F296FDCEDD864C /* Pods */ = {
@@ -204,6 +220,8 @@
 			files = (
 				5FB866E82551D878007FE262 /* ViewController.swift in Sources */,
 				5FB866E42551D878007FE262 /* AppDelegate.swift in Sources */,
+				6BEFB51F25568CAF007CB6BB /* RecordButton.swift in Sources */,
+				6BEFB52225568CCD007CB6BB /* RecordButtonKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +379,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sam.ChiChi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ChiChi/ChiChi-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -382,6 +401,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sam.ChiChi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ChiChi/ChiChi-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
