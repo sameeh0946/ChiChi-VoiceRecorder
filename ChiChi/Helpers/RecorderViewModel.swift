@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 
 
-final class RecorderViewModel {
+final class RecorderViewHelper {
     
     var getAudioFileURL: URL? {
         let docDirURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -31,6 +31,9 @@ final class RecorderViewModel {
     func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
         return input.rawValue
     }
-
+    
 
 }
+
+
+
