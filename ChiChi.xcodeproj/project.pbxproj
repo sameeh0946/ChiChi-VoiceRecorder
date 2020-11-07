@@ -93,7 +93,7 @@
 				6BEFB5462556A10E007CB6BB /* Custom Views */,
 				6BEFB5522556AF96007CB6BB /* Extentions+Protocol */,
 				5FB866E12551D878007FE262 /* Products */,
-				6BEFB5772556D94F007CB6BB /* Record.swift */,
+				6BEFB57D2556DA35007CB6BB /* Model */,
 				6BEFB52425568CD8007CB6BB /* RecordingButton */,
 				6BEFB56B2556D1BD007CB6BB /* Helpers */,
 			);
@@ -169,6 +169,14 @@
 				5FB866E92551D878007FE262 /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		6BEFB57D2556DA35007CB6BB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6BEFB5772556D94F007CB6BB /* Record.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E293E23FC1F296FDCEDD864C /* Pods */ = {
