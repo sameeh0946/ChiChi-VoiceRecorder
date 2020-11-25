@@ -34,7 +34,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         return node
     }()
     var audioBuffer = Data()
-    
     var recordingTs: Double = 0
     
     //MARK:- Outlets
@@ -44,7 +43,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //audioPlayer.isMeteringEnabled = true
         //Audio engine initialization
         initAudioEngine()
         makeConnections()
@@ -54,7 +52,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         setupPlayButton()
         setupTimeLabel()
         setupAudioView()
-        //audioView.amplitude = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,7 +155,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         case .recordingStopped:
             UIApplication.shared.isIdleTimerDisabled = false
             self.audioView.isHidden = true
-            //self.timeLabel.isHidden = true
             break
         case .denied:
             UIApplication.shared.isIdleTimerDisabled = false
@@ -312,7 +308,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     //MARK:-  Audio record for audio buffer for waveform
     private func startRecording() {
     
-        
         self.audioView.density = 1.0
         self.audioView.waveColor = UIColor.blue
         
@@ -341,16 +336,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         catch {
             print("Fail to record.")
         }
-        
-        
-        do {
-            self.audioEngine.prepare()
-            try self.audioEngine.start()
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            return
-        }
-        
         
         self.updateUI(.recording)
     }
@@ -421,7 +406,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
 }
     
     private func startAudioPlayer() {
-        //audioPlayer.play()
         recorderState = .playing
         audioPlayer.delegate = self
         audioPlayer.prepareToPlay()
