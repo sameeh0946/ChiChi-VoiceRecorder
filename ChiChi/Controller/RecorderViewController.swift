@@ -34,7 +34,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         return node
     }()
     var audioBuffer = Data()
-    
     var recordingTs: Double = 0
     
     //MARK:- Outlets
@@ -44,17 +43,15 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //audioPlayer.isMeteringEnabled = true
         //Audio engine initialization
         initAudioEngine()
-        makeConnections()
+
         //Programatic Views Setup
         setupHandelView()
         setupRecordingButton()
         setupPlayButton()
         setupTimeLabel()
         setupAudioView()
-        //audioView.amplitude = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +138,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                             format: inputFormat)
         
         let mainMixerNode = audioEngine.mainMixerNode
-        let mixerFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32,
+        let mixerFormat = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
                                         sampleRate: inputFormat.sampleRate,
                                         channels: inputFormat.channelCount,
                                         interleaved: false)
@@ -158,7 +155,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         case .recordingStopped:
             UIApplication.shared.isIdleTimerDisabled = false
             self.audioView.isHidden = true
-            //self.timeLabel.isHidden = true
             break
         case .denied:
             UIApplication.shared.isIdleTimerDisabled = false
@@ -187,7 +183,8 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
              break
          //showAlert(message: .inRecordingPlayTapped)
          case .recordingStopped:
-             //coinvert and write only if user has recorded a video and after that play the recording
+            
+             //Write only if user has recorded a sound and after that play the recording
              guard let audioFileURL = writeToFile() else {
                  //showAlert(message: .writingAudioToFileFail)
                  return
@@ -297,7 +294,8 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                 print("2seconds \(seconds)")
                 self.timeLabel.text = seconds.toTimeString
             }
-            
+            //MARK:-  Appending audio data to buffer in pcm format
+            //init Data as a PCMBuffer (Data extention found in CommonUtils)
             let data = Data(buffer: buffer)
             self.audioBuffer.append(data)
         }
@@ -312,7 +310,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     //MARK:-  Audio record for audio buffer for waveform
     private func startRecording() {
     
-        
         self.audioView.density = 1.0
         self.audioView.waveColor = UIColor.blue
         
@@ -342,16 +339,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             print("Fail to record.")
         }
         
-        
-        do {
-            self.audioEngine.prepare()
-            try self.audioEngine.start()
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            return
-        }
-        
-        
         self.updateUI(.recording)
     }
     
@@ -363,9 +350,8 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         audioMixerNode.removeTap(onBus: 0)
         audioEngine.stop()
         recorderState = .recordingStopped
-        
         self.audioEngine.inputNode.removeTap(onBus: 0)
-        self.audioEngine.stop()
+
         do {
             try AVAudioSession.sharedInstance().setActive(false)
         } catch  let error as NSError {
@@ -388,21 +374,26 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     }
 
     func writeToFile() -> URL? {
+        
         guard let audioFileURL = recorderViewHelper.getAudioFileURL else {
            // showAlert(message: .storageFileUrl)
             return nil
         }
     // byte array is converted which will be used to get the wav file
     let inputFormat = audioEngine.inputNode.outputFormat(forBus: 0)
+        
     guard let format = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
                                      sampleRate: inputFormat.sampleRate,
                                      channels: inputFormat.channelCount,
                                      interleaved: false),
           let buffer = audioBuffer.toPCMBuffer(format: format)
+    //buffer is a AVAudio PCM Buffer
+    
     else {
         //MissingshowAlert(message: .audioFormatFail)
         return nil
     }
+    //Chunk file in PCM format
     var audioFile: AVAudioFile?
     do {
         audioFile = try getAudioFile(audioFileURL: audioFileURL, settings: format.settings)
@@ -411,7 +402,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         return nil
     }
     do {
-        // converted byte array is now converted into wav format
+        // write from buffer (pcm) into audio file wav format
         try recorderViewHelper.writeToAudioFile(audioFile, audioBuffer: buffer)
     } catch {
         print(error)
@@ -421,7 +412,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
 }
     
     private func startAudioPlayer() {
-        //audioPlayer.play()
         recorderState = .playing
         audioPlayer.delegate = self
         audioPlayer.prepareToPlay()
