@@ -45,7 +45,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         
         //Audio engine initialization
         initAudioEngine()
-        makeConnections()
+
         //Programatic Views Setup
         setupHandelView()
         setupRecordingButton()
