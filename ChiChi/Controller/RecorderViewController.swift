@@ -294,6 +294,8 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                 self.timeLabel.text = seconds.toTimeString
             }
             
+            //init Data as a PCMBuffer (Data extention found in CommonUtils)
+            
             let data = Data(buffer: buffer)
             self.audioBuffer.append(data)
         }
@@ -350,7 +352,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         recorderState = .recordingStopped
         
         self.audioEngine.inputNode.removeTap(onBus: 0)
-        self.audioEngine.stop()
+
         do {
             try AVAudioSession.sharedInstance().setActive(false)
         } catch  let error as NSError {
