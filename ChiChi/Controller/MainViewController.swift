@@ -33,6 +33,7 @@ class MainViewController: UIViewController {
 
 
 extension MainViewController: RecordingsViewControllerDelegate {
+        
     func didStartPlayback() {
         if let recorder = self.recorderViewController {
             recorder.fadeView.isHidden = false

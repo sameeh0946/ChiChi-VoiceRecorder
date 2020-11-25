@@ -25,6 +25,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     var timer: Timer?
     private var recorderViewHelper = RecorderViewHelper()
     
+    var delegatee: RecordingsViewControllerDelegate?
     //MARK:- Audio Properties
     private lazy var audioEngine = AVAudioEngine()
     private lazy var audioMixerNode: AVAudioMixerNode = {
@@ -42,6 +43,8 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //audioPlayer.isMeteringEnabled = true
         //Audio engine initialization
         initAudioEngine()
         makeConnections()
@@ -51,16 +54,19 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         setupPlayButton()
         setupTimeLabel()
         setupAudioView()
-        audioView.amplitude = 0
+        //audioView.amplitude = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let notificationName = AVAudioSession.interruptionNotification
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRecording(_:)), name: notificationName, object: nil)
         print("viewWillAppear")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
         print("viewWillDisappear")
     }
     
@@ -195,6 +201,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
              }
      
          case .playing:
+            startAudioPlayer()
              break
              
          case .denied:
@@ -304,8 +311,11 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     }
     //MARK:-  Audio record for audio buffer for waveform
     private func startRecording() {
+    
+        
         self.audioView.density = 1.0
         self.audioView.waveColor = UIColor.blue
+        
         if self.recorder != nil {
             return
         }
@@ -325,35 +335,34 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: recorderViewHelper.convertFromAVAudioSessionCategory(AVAudioSession.Category.record)))
             self.recorder.record()
+            
+            timer = Timer.scheduledTimer(timeInterval: 0.009, target: self, selector: #selector(self.refreshAudioView(_:)), userInfo: nil, repeats: true)
         }
         catch {
             print("Fail to record.")
         }
         
-        let inputNode = self.audioEngine.inputNode
-        guard let format = recorderViewHelper.format() else {
+        
+        do {
+            self.audioEngine.prepare()
+            try self.audioEngine.start()
+        } catch let error as NSError {
+            print(error.localizedDescription)
             return
         }
         
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, time) in
-            
-            DispatchQueue.main.async {
-                self.timer = Timer.scheduledTimer(timeInterval: 0.009, target: self, selector: #selector(self.refreshAudioView(_:)), userInfo: nil, repeats: true)
-            }
-        }
+        
         self.updateUI(.recording)
     }
     
     
     //MARK:-  Stop Both Time Label and audio record for playblack and audio buffer for waveform
     private func stopAudioRecorder() {
+                
         //Voice Recorder
         audioMixerNode.removeTap(onBus: 0)
         audioEngine.stop()
         recorderState = .recordingStopped
-        
-        //Waveform
-        stopTimer()
         
         self.audioEngine.inputNode.removeTap(onBus: 0)
         self.audioEngine.stop()
@@ -367,10 +376,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
 
     }
     
-    func stopTimer() {
-        self.timer?.invalidate()
-        self.timer = nil
-    }
+
     //MARK:-  Calculating amplitude of the maveform
     @objc internal func refreshAudioView(_: Timer) {
         // Set the amplitude to whatever you need and the view will update itself.
@@ -415,7 +421,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
 }
     
     private func startAudioPlayer() {
-        audioPlayer.play()
+        //audioPlayer.play()
         recorderState = .playing
         audioPlayer.delegate = self
         audioPlayer.prepareToPlay()
