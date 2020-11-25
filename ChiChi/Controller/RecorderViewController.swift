@@ -138,7 +138,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                             format: inputFormat)
         
         let mainMixerNode = audioEngine.mainMixerNode
-        let mixerFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32,
+        let mixerFormat = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
                                         sampleRate: inputFormat.sampleRate,
                                         channels: inputFormat.channelCount,
                                         interleaved: false)
@@ -183,7 +183,8 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
              break
          //showAlert(message: .inRecordingPlayTapped)
          case .recordingStopped:
-             //coinvert and write only if user has recorded a video and after that play the recording
+            
+             //Write only if user has recorded a sound and after that play the recording
              guard let audioFileURL = writeToFile() else {
                  //showAlert(message: .writingAudioToFileFail)
                  return
@@ -293,9 +294,8 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                 print("2seconds \(seconds)")
                 self.timeLabel.text = seconds.toTimeString
             }
-            
+            //MARK:-  Appending audio data to buffer in pcm format
             //init Data as a PCMBuffer (Data extention found in CommonUtils)
-            
             let data = Data(buffer: buffer)
             self.audioBuffer.append(data)
         }
@@ -350,7 +350,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         audioMixerNode.removeTap(onBus: 0)
         audioEngine.stop()
         recorderState = .recordingStopped
-        
         self.audioEngine.inputNode.removeTap(onBus: 0)
 
         do {
@@ -382,6 +381,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         }
     // byte array is converted which will be used to get the wav file
     let inputFormat = audioEngine.inputNode.outputFormat(forBus: 0)
+        
     guard let format = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
                                      sampleRate: inputFormat.sampleRate,
                                      channels: inputFormat.channelCount,
@@ -393,7 +393,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         //MissingshowAlert(message: .audioFormatFail)
         return nil
     }
-        
+    //Chunk file in PCM format
     var audioFile: AVAudioFile?
     do {
         audioFile = try getAudioFile(audioFileURL: audioFileURL, settings: format.settings)
@@ -402,7 +402,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         return nil
     }
     do {
-        // converted byte array is now converted into wav format
+        // write from buffer (pcm) into audio file wav format
         try recorderViewHelper.writeToAudioFile(audioFile, audioBuffer: buffer)
     } catch {
         print(error)
