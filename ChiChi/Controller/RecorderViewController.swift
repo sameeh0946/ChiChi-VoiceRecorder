@@ -206,6 +206,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
              }
      
          case .playing:
+            startAudioPlayer()
              break
              
          case .denied:
@@ -245,7 +246,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                 self.view.frame = defaultFrame
                 self.view.layoutIfNeeded()
             }, completion: nil)
-           // recorderState = .recordingStopped
+            recorderState = .recordingStopped
             self.stopAudioRecorder()
         }
     }
