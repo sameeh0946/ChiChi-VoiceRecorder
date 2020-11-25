@@ -9,12 +9,6 @@ import UIKit
 import AVFoundation
 import Accelerate
 
-protocol RecorderViewControllerDelegate: class {
-    func didStartRecording()
-    func didFinishRecording()
-}
-
-
 
 class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
 
@@ -30,7 +24,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     var audioView = AudioVisualizerView()
     var timer: Timer?
     private var recorderViewHelper = RecorderViewHelper()
-    weak var delegate: RecorderViewControllerDelegate?
+    
     var delegatee: RecordingsViewControllerDelegate?
     //MARK:- Audio Properties
     private lazy var audioEngine = AVAudioEngine()
@@ -348,17 +342,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             print("Fail to record.")
         }
         
-//        let inputNode = self.audioEngine.inputNode
-//        guard let format = recorderViewHelper.format() else {
-//            return
-//        }
-        
-//        inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, time) in
-//
-////            DispatchQueue.main.async {
-////
-////            }
-//        }
         
         do {
             self.audioEngine.prepare()
@@ -375,11 +358,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     
     //MARK:-  Stop Both Time Label and audio record for playblack and audio buffer for waveform
     private func stopAudioRecorder() {
-        
-        if let d = self.delegate {
-            d.didFinishRecording()
-        }
-        
+                
         //Voice Recorder
         audioMixerNode.removeTap(onBus: 0)
         audioEngine.stop()

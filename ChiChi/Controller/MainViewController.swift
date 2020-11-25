@@ -26,37 +26,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if let recorder = self.recorderViewController {
-            recorder.delegate = self
-        }
+
     }
 
-}
-extension MainViewController: RecorderViewControllerDelegate {
-    func didStartRecording() {
-//        if let recordings = self.recordingsViewController {
-//            recordings.fadeView.isHidden = false
-//            UIView.animate(withDuration: 0.25, animations: {
-//                recordings.fadeView.alpha = 1
-//            })
-//        }
-    }
-    
-    func didFinishRecording() {
-//        if let recordings = self.recordingsViewController {
-//            recordings.view.isUserInteractionEnabled = true
-//            UIView.animate(withDuration: 0.25, animations: {
-//                recordings.fadeView.alpha = 0
-//            }, completion: { (finished) in
-//                if finished {
-//                    recordings.fadeView.isHidden = true
-//                    DispatchQueue.main.async {
-//                        recordings.loadRecordings()
-//                    }
-//                }
-//            })
-//        }
-    }
 }
 
 
