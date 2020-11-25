@@ -373,6 +373,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     }
 
     func writeToFile() -> URL? {
+        
         guard let audioFileURL = recorderViewHelper.getAudioFileURL else {
            // showAlert(message: .storageFileUrl)
             return nil
@@ -384,10 +385,13 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                                      channels: inputFormat.channelCount,
                                      interleaved: false),
           let buffer = audioBuffer.toPCMBuffer(format: format)
+    //buffer is a AVAudio PCM Buffer
+    
     else {
         //MissingshowAlert(message: .audioFormatFail)
         return nil
     }
+        
     var audioFile: AVAudioFile?
     do {
         audioFile = try getAudioFile(audioFileURL: audioFileURL, settings: format.settings)
