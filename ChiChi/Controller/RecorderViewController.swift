@@ -72,6 +72,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
         print("viewWillDisappear")
     }
     
@@ -379,14 +380,10 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             d.didFinishRecording()
         }
         
-        
         //Voice Recorder
         audioMixerNode.removeTap(onBus: 0)
         audioEngine.stop()
         recorderState = .recordingStopped
-        
-        //Waveform
-        stopTimer()
         
         self.audioEngine.inputNode.removeTap(onBus: 0)
         self.audioEngine.stop()
@@ -400,10 +397,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
 
     }
     
-    func stopTimer() {
-        self.timer?.invalidate()
-        self.timer = nil
-    }
+
     //MARK:-  Calculating amplitude of the maveform
     @objc internal func refreshAudioView(_: Timer) {
         // Set the amplitude to whatever you need and the view will update itself.
