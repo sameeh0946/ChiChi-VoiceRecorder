@@ -309,11 +309,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     }
     //MARK:-  Audio record for audio buffer for waveform
     private func startRecording() {
-    
-        
-        self.audioView.density = 1.0
-        self.audioView.waveColor = UIColor.blue
-        
+
         if self.recorder != nil {
             return
         }
