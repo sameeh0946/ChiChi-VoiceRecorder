@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-938" y="105"/>
         </scene>
-        <!--Record to see waveform-->
+        <!--Record for waveform-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="ChiChi" customModuleProvider="target" sceneMemberID="viewController">
@@ -52,7 +52,7 @@
                             <constraint firstItem="A4Y-6b-edj" firstAttribute="centerX" secondItem="yda-Zo-Hax" secondAttribute="centerX" id="oJr-Pc-AGb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Record to see waveform" id="Urc-7W-oXr"/>
+                    <navigationItem key="navigationItem" title="Record for waveform" id="Urc-7W-oXr"/>
                     <connections>
                         <outlet property="recorderView" destination="A4Y-6b-edj" id="WN3-ZS-xht"/>
                     </connections>

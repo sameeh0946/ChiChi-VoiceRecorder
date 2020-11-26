@@ -254,7 +254,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                     if result {
                         self.audioBuffer.removeAll()
                         self.startAudioRecorder()
-                        self.startRecording()
                     }
                     else {
                         self.recorderState = .denied
@@ -267,7 +266,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             
             self.audioBuffer.removeAll()
             self.startAudioRecorder()
-            self.startRecording()
             break
         case .denied:
             
@@ -281,6 +279,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     //MARK:-  Recording Functions
     //MARK:-  Audio record for Time Label and audio record for playblack
     func startAudioRecorder() {
+        amplitudeForWaveform()
         let tapNode: AVAudioNode = audioMixerNode
         let format = tapNode.outputFormat(forBus: 0)
         self.recordingTs = NSDate().timeIntervalSince1970
@@ -292,7 +291,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             DispatchQueue.main.async {
                 
                 let seconds = (ts - self.recordingTs)
-                print("2seconds \(seconds)")
                 self.timeLabel.text = seconds.toTimeString
             }
             //MARK:-  Storing in byte buffer (refer extention for data)
@@ -308,7 +306,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         }
     }
     //MARK:-  Audio record for audio buffer for waveform
-    private func startRecording() {
+    private func amplitudeForWaveform() {
 
         if self.recorder != nil {
             return
@@ -367,7 +365,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         recorder.updateMeters()
         let normalizedValue:CGFloat = pow(10, CGFloat(recorder.averagePower(forChannel: 0))/20)
         self.audioView.amplitude = normalizedValue
-        print("refreshAudioView normalizedValue : \(normalizedValue)")
+  
     }
 
     func writeToFile() -> URL? {
