@@ -172,7 +172,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         }
     }
     
-    //MARK:- Play / Record Tap functions
+    //MARK:- Play / Record Tap functions 
     @objc func handlePlay(_ sender: UIButton) {
         print("handlePlay")
         switch recorderState {
