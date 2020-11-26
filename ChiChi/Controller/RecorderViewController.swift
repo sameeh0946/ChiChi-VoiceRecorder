@@ -254,7 +254,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                     if result {
                         self.audioBuffer.removeAll()
                         self.startAudioRecorder()
-                        self.startRecording()
                     }
                     else {
                         self.recorderState = .denied
@@ -267,7 +266,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             
             self.audioBuffer.removeAll()
             self.startAudioRecorder()
-            self.startRecording()
             break
         case .denied:
             
@@ -281,6 +279,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     //MARK:-  Recording Functions
     //MARK:-  Audio record for Time Label and audio record for playblack
     func startAudioRecorder() {
+        amplitudeForWaveform()
         let tapNode: AVAudioNode = audioMixerNode
         let format = tapNode.outputFormat(forBus: 0)
         self.recordingTs = NSDate().timeIntervalSince1970
@@ -307,7 +306,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         }
     }
     //MARK:-  Audio record for audio buffer for waveform
-    private func startRecording() {
+    private func amplitudeForWaveform() {
 
         if self.recorder != nil {
             return
