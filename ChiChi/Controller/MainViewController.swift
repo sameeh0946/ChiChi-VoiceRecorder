@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
     }
     
     //MARK:- Outlets
-//    @IBOutlet weak var recordingsView: UIView!
+
     @IBOutlet weak var recorderView: UIView!
     
     //MARK:- Life Cycle

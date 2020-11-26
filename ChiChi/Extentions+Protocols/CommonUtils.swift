@@ -10,8 +10,8 @@ import AVFoundation
 import UIKit
 
 extension UIViewController {
-    func showAlert(title: String = "Alert",
-                   message: ErrorMessage,
+    func showAlert(title: String = Message.alertTitleMessage.rawValue,
+                   message: Message,
                    buttonTitle: String = "Ok",
                    buttonHandler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title,
@@ -26,6 +26,7 @@ extension UIViewController {
 }
 
 extension Data {
+    
     init(buffer: AVAudioPCMBuffer) {
         let audioBuffer = buffer.audioBufferList.pointee.mBuffers
         self.init(bytes: audioBuffer.mData!, count: Int(audioBuffer.mDataByteSize))

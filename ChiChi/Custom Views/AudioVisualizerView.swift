@@ -21,51 +21,50 @@ class AudioVisualizerView: UIView {
     * Setting a value greater 0 provides a more vivid visualization.
     * Default: 0.01
     */
-    @IBInspectable open var idleAmplitude:CGFloat = 0.01
+    @IBInspectable open var idleAmplitude:CGFloat = 0.10
     
     /*
     * The phase shift that will be applied with each level setting
     * Change this to modify the animation speed or direction
     * Default: -0.15
     */
-    @IBInspectable open var phaseShift:CGFloat = -0.15
+    @IBInspectable open var phaseShift:CGFloat = -0.08
     
     /*
     * The lines are joined stepwise, the more dense you draw, the more CPU power is used.
     * Default: 1
     */
-    @IBInspectable open var density:CGFloat = 1.0
+    @IBInspectable open var density:CGFloat = 0.5
     
     /*
     * Line width used for the prominent wave
     * Default: 1.5
     */
-    @IBInspectable open var primaryLineWidth:CGFloat = 1.5
+    @IBInspectable open var primaryLineWidth:CGFloat = 3.0
     
     /*
     * Line width used for all secondary waves
     * Default: 0.5
     */
-    @IBInspectable open var secondaryLineWidth:CGFloat = 0.5
+    @IBInspectable open var secondaryLineWidth:CGFloat = 1.5
     
     
     /*
     * The total number of waves
     * Default: 6
     */
-    @IBInspectable open var numberOfWaves:Int = 6
+    @IBInspectable open var numberOfWaves:Int = 5
     
     /*
     * Color to use when drawing the waves
     * Default: white
     */
-    @IBInspectable open var waveColor:UIColor = UIColor.white
-    
+    @IBInspectable open var waveColor:UIColor = UIColor(red:0.29, green:1.30, blue:2.45, alpha:1.0)
     
     /*
     * The current amplitude.
     */
-    @IBInspectable open var amplitude:CGFloat = 1.0 {
+    @IBInspectable open var amplitude:CGFloat = 0 {
         didSet {
             amplitude = max(amplitude, self.idleAmplitude)
             self.setNeedsDisplay()

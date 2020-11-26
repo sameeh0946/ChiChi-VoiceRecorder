@@ -24,8 +24,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     var audioView = AudioVisualizerView()
     var timer: Timer?
     private var recorderViewHelper = RecorderViewHelper()
-    
-    var delegatee: RecordingsViewControllerDelegate?
+
     //MARK:- Audio Properties
     private lazy var audioEngine = AVAudioEngine()
     private lazy var audioMixerNode: AVAudioMixerNode = {
@@ -52,6 +51,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         setupPlayButton()
         setupTimeLabel()
         setupAudioView()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -172,13 +172,14 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         }
     }
     
-    //MARK:- Play / Record Tap functions
+    //MARK:- Play / Record Tap functions 
     @objc func handlePlay(_ sender: UIButton) {
         print("handlePlay")
         switch recorderState {
          case .notInitiated:
+             self.showAlert(message: .noRecordingPlayTapped)
              break
-         //showAlert(message: .noRecordingPlayTapped)
+
          case .recording:
              break
          //showAlert(message: .inRecordingPlayTapped)
@@ -294,8 +295,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                 print("2seconds \(seconds)")
                 self.timeLabel.text = seconds.toTimeString
             }
-            //MARK:-  Appending audio data to buffer in pcm format
-            //init Data as a PCMBuffer (Data extention found in CommonUtils)
+            //MARK:-  Storing in byte buffer (refer extention for data)
             let data = Data(buffer: buffer)
             self.audioBuffer.append(data)
         }
@@ -309,10 +309,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     }
     //MARK:-  Audio record for audio buffer for waveform
     private func startRecording() {
-    
-        self.audioView.density = 1.0
-        self.audioView.waveColor = UIColor.blue
-        
+
         if self.recorder != nil {
             return
         }
@@ -379,7 +376,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
            // showAlert(message: .storageFileUrl)
             return nil
         }
-    // byte array is converted which will be used to get the wav file
+    //MARK:-  Converting byte array.
     let inputFormat = audioEngine.inputNode.outputFormat(forBus: 0)
         
     guard let format = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
