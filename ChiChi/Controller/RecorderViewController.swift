@@ -181,13 +181,13 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
              break
 
          case .recording:
-             break
-         //showAlert(message: .inRecordingPlayTapped)
+            break
+
          case .recordingStopped:
             
              //Write only if user has recorded a sound and after that play the recording
              guard let audioFileURL = writeToFile() else {
-                 //showAlert(message: .writingAudioToFileFail)
+                 showAlert(message: .writingAudioToFileFail)
                  return
              }
              
@@ -195,7 +195,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                  audioPlayer = try AVAudioPlayer(contentsOf: audioFileURL)
                  startAudioPlayer()
              } catch {
-                 //showAlert(message: .audioPlayerError)
+                 showAlert(message: .audioPlayerError)
              }
      
          case .playing:
@@ -304,7 +304,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             try audioEngine.start()
             recorderState = .recording
         } catch {
-            //SHOWALERT MISSING showAlert(message: .audioEngineNotStarted)
+            showAlert(message: .audioEngineNotStarted)
         }
     }
     //MARK:-  Audio record for audio buffer for waveform
@@ -373,7 +373,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     func writeToFile() -> URL? {
         
         guard let audioFileURL = recorderViewHelper.getAudioFileURL else {
-           // showAlert(message: .storageFileUrl)
+            showAlert(message: .storageFileUrl)
             return nil
         }
     //MARK:-  Converting byte array.
@@ -387,7 +387,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     //buffer is a AVAudio PCM Buffer
     
     else {
-        //MissingshowAlert(message: .audioFormatFail)
+            showAlert(message: .audioFormatFail)
         return nil
     }
     //Chunk file in PCM format
@@ -395,7 +395,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     do {
         audioFile = try getAudioFile(audioFileURL: audioFileURL, settings: format.settings)
     } catch {
-        //MissingshowAlert(message: .audioFileNotCreated)
+            showAlert(message: .audioFileNotCreated)
         return nil
     }
     do {
