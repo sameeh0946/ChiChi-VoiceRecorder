@@ -24,8 +24,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     var audioView = AudioVisualizerView()
     var timer: Timer?
     private var recorderViewHelper = RecorderViewHelper()
-    
-    var delegatee: RecordingsViewControllerDelegate?
+
     //MARK:- Audio Properties
     private lazy var audioEngine = AVAudioEngine()
     private lazy var audioMixerNode: AVAudioMixerNode = {
@@ -297,7 +296,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                 print("2seconds \(seconds)")
                 self.timeLabel.text = seconds.toTimeString
             }
-            
+            //MARK:-  Storing in byte buffer
             let data = Data(buffer: buffer)
             self.audioBuffer.append(data)
         }
@@ -392,7 +391,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
            // showAlert(message: .storageFileUrl)
             return nil
         }
-    // byte array is converted which will be used to get the wav file
+    //MARK:-  Converting byte array
     let inputFormat = audioEngine.inputNode.outputFormat(forBus: 0)
     guard let format = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
                                      sampleRate: inputFormat.sampleRate,
