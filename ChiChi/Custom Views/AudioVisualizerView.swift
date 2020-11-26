@@ -65,7 +65,7 @@ class AudioVisualizerView: UIView {
     /*
     * The current amplitude.
     */
-    @IBInspectable open var amplitude:CGFloat = 1.0 {
+    @IBInspectable open var amplitude:CGFloat = 0 {
         didSet {
             amplitude = max(amplitude, self.idleAmplitude)
             self.setNeedsDisplay()

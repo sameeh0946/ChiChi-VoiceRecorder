@@ -43,7 +43,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //audioPlayer.isMeteringEnabled = true
         //Audio engine initialization
         initAudioEngine()
         makeConnections()
@@ -53,7 +52,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         setupPlayButton()
         setupTimeLabel()
         setupAudioView()
-        //audioView.amplitude = 0
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -296,7 +295,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
                 print("2seconds \(seconds)")
                 self.timeLabel.text = seconds.toTimeString
             }
-            //MARK:-  Storing in byte buffer
+            //MARK:-  Storing in byte buffer (refer extention for data)
             let data = Data(buffer: buffer)
             self.audioBuffer.append(data)
         }
@@ -391,7 +390,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
            // showAlert(message: .storageFileUrl)
             return nil
         }
-    //MARK:-  Converting byte array
+    //MARK:-  Converting byte array.
     let inputFormat = audioEngine.inputNode.outputFormat(forBus: 0)
     guard let format = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
                                      sampleRate: inputFormat.sampleRate,
