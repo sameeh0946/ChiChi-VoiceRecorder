@@ -179,8 +179,9 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         print("handlePlay")
         switch recorderState {
          case .notInitiated:
+             self.showAlert(message: .noRecordingPlayTapped)
              break
-         //showAlert(message: .noRecordingPlayTapped)
+
          case .recording:
              break
          //showAlert(message: .inRecordingPlayTapped)
