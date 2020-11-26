@@ -292,7 +292,6 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
             DispatchQueue.main.async {
                 
                 let seconds = (ts - self.recordingTs)
-                print("2seconds \(seconds)")
                 self.timeLabel.text = seconds.toTimeString
             }
             //MARK:-  Storing in byte buffer (refer extention for data)
@@ -367,7 +366,7 @@ class RecorderViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRe
         recorder.updateMeters()
         let normalizedValue:CGFloat = pow(10, CGFloat(recorder.averagePower(forChannel: 0))/20)
         self.audioView.amplitude = normalizedValue
-        print("refreshAudioView normalizedValue : \(normalizedValue)")
+  
     }
 
     func writeToFile() -> URL? {
